@@ -1,22 +1,27 @@
-let arr = [ -5, 16, 33, 42, 103, 344];
+//Create a constructor a functions which builds object for us
+function createPerson(name, height, weight) {
+  return { name: name, height: height, weight: weight };
+}
 
-console.log(arr.includes(-5));//true
+function calcBMI(weight, height) {
+  return weight / (height * height);
+}
 
-arr.push(11);//adds item to the end
+function avgBMI(people) {
+  let sum = 0;
+  for (let person of people) {
+    //sum the bmi of each person
+    sum += calcBMI(person.weight, person.height);
+  }
+  //calculate average
+  return sum / people.length;
+}
 
-console.log(arr)//[ -5, 16, 33, 42, 103, 344, 11];
+//create a collection of people
+let people = [
+  createPerson("Sally", 60, 2.5),
+  createPerson("Ben", 81, 3),
+  createPerson("Shelly", 50, 1.7)
+];
 
-let lastItem = arr.pop();//removes last item
-
-console.log(lastItem, arr);//11, [ -5, 16, 33, 42, 103, 344]
-
-arr.unshift(22);//adds item to the front
-
-console.log(arr);//[22, -5, 16, 33, 42, 103, 344]
-
-let firstItem = arr.shift();//removes first item
-console.log(firstItem, arr);//22, [-5, 16, 33, 42, 103, 344]
-
-let reversed = arr.reverse();//creates a new array in reverse order 
-console.log(reversed);//[344, 103, 42, 33, 16, -5]
-console.log(arr.join('-'));//"-5-103-16-33-344-42" joins array with provided separator
+console.log(avgBMI(people));
